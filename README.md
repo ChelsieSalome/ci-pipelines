@@ -47,7 +47,7 @@ I created a Jenkins pipeline to automate testing of my Python modules.
 * **Reference**: I referenced the shared library in my `Jenkinsfile` located at `GitLab CI/ci/Jenkinsfile`.
 * **Automation**: I configured triggers and a webhook for automatic builds.
 ---
-<img src="screenshots/kubectl-get-pods.png" width="700">
+<img src="screenshots/carLot-build.png" width="700">
 
 ### File References
 | File | Purpose |
@@ -70,7 +70,7 @@ For GitLab CI, I focused on automating testing and code management for the point
     * **Lint/Code Checks**: Code style verification.
 * **Integration**: Integrated with my Python project structure inside `GitLab CI/`.
 ---
-<img src="screenshots/kubectl-get-pods.png" width="700">
+<img src="screenshots/gitlab-ci.png" width="700">
 
 ### File References
 | File | Purpose |

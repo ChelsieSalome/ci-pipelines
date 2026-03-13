@@ -1,8 +1,7 @@
 # ci-pipelines
 
 This repository showcases the **CI/CD pipelines** I implemented using **Jenkins** and **GitLab CI** for Python projects.  
-I built these pipelines to automate testing, code reuse, and continuous integration, while keeping things modular and maintainable.
-
+I built these pipelines to automate testing, code reuse, and continuous integration.
 ---
 
 ## Repository Structure
@@ -33,18 +32,13 @@ CI-Pipelines/
 └─ README.md
 ```
 
-
-# CI Pipelines Demo
-
-This repository showcases the **CI/CD pipelines** I implemented using **Jenkins** and **GitLab CI** for Python projects. I built these pipelines to automate testing, code reuse, and continuous integration.
-
 ## Jenkins Pipeline
 
 ### What I Did
 I created a Jenkins pipeline to automate testing of my Python modules.
 
 * **Shared Library**: I created a shared library at `Jenkins/ci_functions/vars/python_build.groovy` to store reusable functions. This allowed me to follow the DRY principle.
-* **Reference**: I referenced the shared library in my `Jenkinsfile` located at `GitLab CI/ci/Jenkinsfile`.
+* **Reference**: I referenced the shared library in my `Jenkinsfile` located at `Jenkins/carLot/ci/Jenkinsfile`.
 * **Automation**: I configured triggers and a webhook for automatic builds.
 ---
 <img src="screenshots/carLot-build.png" width="700">
@@ -53,7 +47,7 @@ I created a Jenkins pipeline to automate testing of my Python modules.
 | File | Purpose |
 | :--- | :--- |
 | `Jenkins/ci_functions/vars/python_build.groovy` | Shared library with reusable pipeline functions |
-| `CarLot/ci/Jenkinsfile` | Main Jenkins pipeline definition |
+| `Jenkins/CarLot/ci/Jenkinsfile` | Main Jenkins pipeline definition |
 
 
 ---

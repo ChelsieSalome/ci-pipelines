@@ -24,6 +24,8 @@ CI-Pipelines/
 │  └─ test_points_api.py
 ├─ Jenkins/
 │  ├─ carLot/
+│  ├─    ├─  ci/
+│  ├─    ├─     └─ Jenkinsfile
 │  └─ ci_functions/
 │      └─ vars/
 │          └─ python_build.groovy
@@ -43,18 +45,16 @@ I created a Jenkins pipeline to automate testing of my Python modules.
 
 * **Shared Library**: I created a shared library at `Jenkins/ci_functions/vars/python_build.groovy` to store reusable functions. This allowed me to follow the DRY principle.
 * **Reference**: I referenced the shared library in my `Jenkinsfile` located at `GitLab CI/ci/Jenkinsfile`.
-* **Stages**:
 * **Automation**: I configured triggers and a webhook for automatic builds.
+---
+<img src="screenshots/kubectl-get-pods.png" width="700">
 
 ### File References
 | File | Purpose |
 | :--- | :--- |
 | `Jenkins/ci_functions/vars/python_build.groovy` | Shared library with reusable pipeline functions |
-| `GitLab CI/ci/Jenkinsfile` | Main Jenkins pipeline definition |
+| `CarLot/ci/Jenkinsfile` | Main Jenkins pipeline definition |
 
-### Screenshots
-* Jenkins pipeline execution: `screenshots/jenkins_pipeline.png`
-* Stage visualization: `screenshots/jenkins_stages.png`
 
 ---
 
@@ -69,6 +69,8 @@ For GitLab CI, I focused on automating testing and code management for the point
     * **Run Tests**: Execute unit tests (`test_point_manager.py` and `test_points_api.py`).
     * **Lint/Code Checks**: Code style verification.
 * **Integration**: Integrated with my Python project structure inside `GitLab CI/`.
+---
+<img src="screenshots/kubectl-get-pods.png" width="700">
 
 ### File References
 | File | Purpose |
@@ -77,11 +79,7 @@ For GitLab CI, I focused on automating testing and code management for the point
 | `GitLab CI/*.py` | All python files (logic, database, testing) |
 | `GitLab CI/requirements.txt` | Python dependencies |
 
-### Screenshots
-* GitLab CI pipeline: `screenshots/gitlab_ci_pipeline.png`
-* Stage execution: `screenshots/gitlab_ci_stages.png`
 
----
 
 
 

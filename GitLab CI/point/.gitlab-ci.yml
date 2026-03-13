@@ -1,0 +1,94 @@
+stages:
+  - setup
+  - build
+  - lint
+  - test
+  - zip
+
+setup:
+  stage: setup
+  script:
+    - echo "Running pipeline ${CI_PIPELINE_ID} with workspace ${CI_PROJECT_DIR}"
+    - python3 -m venv venv
+    - venv/bin/pip install coverage pylint
+  artifacts:
+    paths:
+      - venv/
+    expire_in: 1 hour
+
+build:
+  stage: build
+  dependencies:
+    - setup
+  script:
+    - venv/bin/pip install -r requirements.txt
+  artifacts:
+    paths:
+      - venv/
+    expire_in: 1 hour
+lint:
+  stage: lint
+  dependencies:
+    - build
+  script:
+    - venv/bin/pylint --fail-under 5 *.py
+#  artifacts:
+#    paths:
+#      - venv/  
+#    expire_in: 1 hour
+
+test_and_coverage:
+  stage: test
+  dependencies:
+    - build
+  script:
+    # - mkdir -p test-reports api-test-reports
+    - |
+      found_tests=0
+      for file in test*.py; do
+        if [ -f "$file" ]; then
+          found_tests=1
+          echo "Running tests in $file with XML output"
+
+          echo "Determining output directory based on filename"
+          if [[ "$file" == *"api"* ]]; then
+            output_dir="api-test-reports"
+          else
+            output_dir="test-reports"
+          fi
+          echo "output directory is $output_dir"
+
+          echo "Running test with xmlrunner AND coverage for $file"
+          #venv/bin/python -m coverage run --append --omit '*/site-packages/*,*/dist-packages/*' -m xmlrunner discover -s . -p "$file" -o "$output_dir"
+          venv/bin/coverage run --append --omit '*/site-packages/*,*/dist-packages/*' "$file"
+        fi
+      done
+
+      if [ "$found_tests" -eq 0 ]; then
+        echo "No test files matching test*.py were found"
+        exit 1
+      fi
+    - venv/bin/python -m coverage report
+  artifacts:
+    when: always
+    paths:
+      - test-reports/
+      - api-test-reports/
+    reports:
+      junit:
+        - test-reports/*.xml
+        - api-test-reports/*.xml
+    expire_in: 1 hour
+
+zip_artifacts:
+  stage: zip
+  dependencies:
+    - test_and_coverage
+  script:
+    - echo "Preparing artifact for Python files"
+  artifacts:
+    name: "point-project"
+    when: on_success
+    paths:
+      - "*.py"
+    expire_in: 1 week

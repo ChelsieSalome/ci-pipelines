@@ -1,6 +1,6 @@
 # ci-pipelines
 
-This repository showcases the **CI/CD pipelines** I implemented using **Jenkins** and **GitLab CI** for Python projects.  
+* This repository showcases the **CI/CD pipelines** I implemented using **Jenkins** and **GitLab CI** for Python projects.  
 I built these pipelines to automate testing, code reuse, and continuous integration.
 ---
 
